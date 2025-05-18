@@ -1,0 +1,124 @@
+.about-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: fit-content;
+  background-color: transparent;
+  font-family: "Jersey 20", "Poppins", sans-serif;
+}
+
+.design-1{
+  color: #FF9E01;
+}
+.about-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  background-color: #04045E;
+  color: #FF9E01;
+  box-sizing: border-box;
+  padding: 1em 2em;
+  border-top: 5px solid #FF9E01;
+  border-bottom: 5px solid #FF9E01;
+}
+
+.about-header h3 {
+  font-size: clamp(2em , 5vw ,10em);
+}
+
+.about-header p {
+  font-size: clamp(1em, 2vw, 2.5em);
+  padding: 1em 5em;
+  text-align: center;
+}
+
+.about-card-container {
+  background-color: #FF9E01;
+  width: 25em;
+  padding: 2em;
+  min-width: 250px;
+  min-height: 250px;
+  border-radius: 15px;
+  border: 1px solid #04045E;
+  color: #04045E;
+}
+
+.about-card-container p {
+  font-size: clamp(1em, 2vw, 2.5em);
+  text-align: justify;
+}
+
+.about-card-container h4 {
+  font-size: 3.5em;
+  margin: 0.2em 0;
+}
+
+.about-layout-card-right {
+  background-color: transparent;
+  display: flex;
+  box-sizing: border-box;
+  padding: 2em 5em;
+}
+
+.about-layout-card-left {
+  background-color: transparent;
+  display: flex;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  padding: 2em 5em;
+}
+
+.about-footer {
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  background-color: #04045E;
+  color: #FF9E01;
+  box-sizing: border-box;
+  padding: 1em;
+  margin: 5em 0 3em 0;
+  border-top: 5px solid #FF9E01;
+  border-bottom: 5px solid #FF9E01;
+}
+
+.about-footer p {
+  font-size: clamp(1em, 2vw, 2.5em);
+  padding: 0.8em 4em;
+  text-align: center;
+}
+
+@media screen and (max-width:505px) {
+  .about-header p {
+    font-size: clamp(1em, 2vw, 2.5em);
+    padding: 1em 0.2em;
+    text-align: center;
+  }
+}
+@media screen and (max-width:475px) {
+  .about-card-container {
+    background-color: #FF9E01;
+    width: 25em;
+    padding: 2em;
+    min-width: 50px;
+    min-height: 20px;
+    border-radius: 15px;
+    border: 1px solid #04045E;
+    color: #04045E;
+  }
+
+
+  .about-card-container h4 {
+    font-size: clamp(1.4em , 5vw ,10em);
+    margin: 0.2em 0;
+  }
+  .about-card-container p{
+    font-size: clamp(0.7em, 2vw, 2.5em);
+  }
+
+}

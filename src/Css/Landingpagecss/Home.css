@@ -1,0 +1,480 @@
+/* General styles for the Home component */
+*{
+  padding: 0;
+  margin: 0;
+}
+html,body{
+  margin: 0;
+  padding: 0;
+  overflow-x: auto; /* Allow horizontal scroll if absolutely needed */
+  width: 100%;
+}
+
+.content {
+    width: 100%;
+    height: fit-content;
+    background-color: transparent;
+    z-index: -2;
+    box-sizing: border-box;
+    font-family: "Jersey 20", "Poppins", sans-serif;
+  }
+  
+  a{
+    cursor: pointer;
+  }
+  header{
+    display: flex;
+    background-color: #ffffff;
+    width: 100%;
+    height: 5em;
+    border-bottom:2px solid #FF9E01;
+    box-shadow: 0px 0px 50px 1px gray;
+    justify-content: space-between;
+    z-index: 9999;
+    font-family: "Jersey 20", "Poppins", sans-serif;
+  }
+  .header-logo{
+    width: 11%;
+    min-width: 50px;
+    margin: 0 0.2em 0 2.4em;
+  }
+  /*CSS FOR THE LEFT SIDE OF THE HEADER*/
+  .header-branding-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: transparent;
+    width: 35%;
+    color: #04045E;
+    flex-shrink: 1;;
+  }
+  .header-branding-div h1{
+   flex-shrink: 1;
+   font-size:clamp(0.5em, 50px,3em);
+  }
+  .design-1{
+    color: #FF9E01;
+  }
+  
+  /* CSS FOR THE RIGHT SIDE OF THE HEADER*/
+  nav{
+    display: flex;
+    width: 75%;
+    background-color: #ffffff;
+    justify-content: flex-end;
+    align-items: center;
+    flex-shrink: 1;
+    box-sizing: border-box;
+  }
+  nav ul{
+    display: flex;
+    flex-direction: row;
+    margin: 0 2em ;
+    flex-shrink: 1;
+  }
+  nav li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    margin: 0.5em;
+    background-color: transparent;
+    width: 6em;
+    height: 2em;
+    border: 1px solid #04045E;
+    border-radius: 12px;
+    font-size: 1fr;
+    flex-shrink: 1;
+  }
+  nav li:hover a{
+    background-color: #04045E;
+    color: #FF9E01;
+  }
+  
+  nav a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+    flex-shrink: 1;
+    color: #04045E;
+  }
+  
+  .homeSection {
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
+    background-color: transparent;
+    height: 100vh;
+    box-sizing: border-box;
+    z-index: 5;
+  }
+  
+  .homesection-upper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+    font-size: 280%;
+    padding: 0.2em;
+    box-sizing: border-box;
+    color: #04045e;
+    flex-shrink: 1;
+    z-index: 5;
+    margin: 0.5em 1em;
+    font-family: "Jersey 20", "Poppins", sans-serif;
+  }
+  
+  .home-left {
+    display: flex;
+    background-color: transparent;
+    width: 70%;
+    height: auto;
+    margin: 1em 1em;
+    flex-shrink: 1;
+  }
+  
+  .home-right {
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .home-right img {
+    width: 45%;
+    height: auto; /* Maintain the aspect ratio */
+    object-fit: cover; /* Ensure the image fits nicely within its container */
+    display: flex; /* Prevent inline spacing issues */
+    margin: 0 auto; /* Center the image horizontally */
+    min-width: 5em;
+    flex-shrink: 1;
+  }
+  
+  .homesection-lower {
+    background-color: transparent;
+    font-family: "Jersey 20", "Poppins", sans-serif;
+  }
+  
+  .homesection-email-div {
+    background-color: transparent;
+    width: 55%;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    font-family: "Jersey 20", "Poppins", sans-serif;
+  }
+  
+  .homesection-email-div input {
+    width: 80%;
+    height: 20%;
+    padding: 1em;
+    border-radius: 10px;
+    border: 2px solid #ff9e01;
+    outline: none;
+    font-size: 1.2em;
+    color: #04045e;
+    z-index: 2;
+    margin-left: 6em;
+    font-family: "Jersey 20", "Poppins", sans-serif;
+  }
+  
+  .submitButton {
+    height: 60%;
+    width: 20%;
+    margin: 0 1em 0 1em;
+    background-color: transparent;
+    border: 2px solid #ff9e01;
+    border-radius: 10px;
+    transition: background-color 0.2s ease-in-out;
+    font-size: 1.2em;
+    z-index: 2;
+    font-family: "Jersey 20", "Poppins", sans-serif;
+  }
+  
+  .submitButton:hover {
+    background-color: #ff9e01;
+    cursor: pointer;
+  }
+  
+  /* Floating elements */
+  .bt-1 {
+    position: absolute;
+    top: 90px;
+    right: 50px;
+    width: 70%;
+    height: 70%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  
+  .bt-2 {
+    position: absolute;
+    left: -300px;
+    top: 80px;
+    width: 50%;
+    height: 50%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  
+  .bt-3 {
+    position: absolute;
+    left: -80px;
+    bottom: -5px;
+    width: 80%;
+    height: 80%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .links-container{
+    display: none;
+  }
+  #sidebar-active{
+    display: none;
+  }
+
+  .open-sidebar-button {
+      display: none;
+  }
+
+  
+
+
+  @media screen and (max-width: 1000px) {
+    nav{
+      display: none;
+    }
+    header{
+      z-index: 111;
+      border: none;
+    }
+
+    .header-branding-div{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      background-color: #ffffff;
+      width: 100%;
+      height: 100%;
+      min-width: 200px;
+      color: #04045E;
+      flex-shrink: 1;
+      position: relative;
+      border-bottom: 2px solid #FF9E01;
+    }
+    .open-sidebar-button {
+      display: flex;
+      position: absolute; 
+      box-sizing: border-box;
+      padding: 1em;
+      left: 0; 
+      top: 50%; 
+      transform: translateY(-50%); 
+    }
+
+    .header-logo{
+      width: 7%;
+      margin: 0 0.2em 0 2.4em;
+    }
+
+    .header-branding-div h1{
+      flex-shrink: 1;
+      font-size: clamp(1.8em , 6vw , 10em);
+     }
+
+     .homesection-lower {
+      background-color: transparent;
+      display: flex;
+      width: 100%;
+      height: fit-content;
+      margin-top: 2em;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 1;
+    }
+
+    .homesection-lower input{
+      width: 80%;
+      height: 10%;
+      padding: 1em;
+      flex-shrink: 1;
+    }
+
+    .homesection-email-div {
+      display: flex;
+      background-color: transparent;
+      width: 100%;
+      flex-direction: column;
+      height: fit-content;
+      margin: 1em 3em;
+      padding: 0;
+      z-index: 2;
+      justify-content: center;
+      align-items: center;
+    }
+    .homesection-email-div button{
+      width: 40%;
+      height: fit-content;
+      margin: 0.5em 0 0 1.2em;
+      font-size: 1.5em;
+    }
+
+    .content {
+      width: 100%;
+      height: 40em;
+      background-color: transparent;
+      z-index: -2;
+      box-sizing: border-box;
+    }
+
+    .home-right img {
+      width: 60%;
+      height: auto; /* Maintain the aspect ratio */
+      object-fit: cover; /* Ensure the image fits nicely within its container */
+      display: flex; /* Prevent inline spacing issues */
+      margin: 0 2em; /* Center the image horizontally */
+
+      flex-shrink: 1;
+    }
+
+    .homesection-upper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: auto;
+      background-color: transparent;
+      font-size: 150%;
+      padding: 0.2em;
+      box-sizing: border-box;
+      color: #04045e;
+      flex-shrink: 1;
+      z-index: 5;
+    }
+    .homesection-email-div input{
+      margin: 0;
+    }
+    .homesection-email-div button{
+      margin: 0.4em 0;
+    }
+    .home-left {
+      display: flex;
+      background-color: transparent;
+      width: 100%;
+      height: auto;
+      margin: 1em 1em;
+      flex-shrink: 1;
+    }
+
+    .links-container{
+      position: fixed;
+      display: flex;
+      top: 0;
+      left: -50%;
+      height: 100%;
+      background-color: #f7f7f7;
+      flex-direction: column;
+      width: 40%;
+      z-index: 10;
+      align-items: center;
+      border: 1px solid #04045E;
+      box-shadow: 1em 0 5em 0.1em rgb(126, 126, 126);
+      transition: 0.7s ease-in-out;
+    }
+  
+    .links-container label{
+      box-sizing: border-box;
+      padding: 1em;
+      align-self: flex-start;
+    }
+  
+    .links-container a{
+      display: none;
+      box-sizing: border-box;
+      text-decoration: none;
+      background-color: transparent;
+      width: 70%;
+      height: auto;
+      margin: 1em 0;
+      padding: 1em;
+      text-align:start;
+      align-items: center;
+      background-color: #f7f7f7;
+      border-radius: 10px;
+      color: #04045E;
+      font-size: clamp(15px , 1.5vw , 1.8em);
+      gap: 0.5em;
+    }
+    .links-container img{
+      background-color: transparent; 
+      justify-self: flex-start;
+      align-self: flex-start;
+      height: 1.5em;
+    }
+    .links-container a:hover{
+      background-color: #d1d1d1;
+      color: #04045e94;
+      
+    }
+    .links-container a:hover img{
+      opacity: 0.5;
+    }
+    #sidebar-active{
+      position: fixed;
+    }
+    #sidebar-active:checked ~ .links-container {
+      left: 0%;
+    }
+    #sidebar-active:checked ~ .links-container a {
+      display: flex; /* Ensure links are visible when sidebar is active */
+    }
+  }
+
+  @media screen and (max-width:500px){
+    .homesection-lower {
+      background-color: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center ;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    button{
+      font-size: 0.5em;
+    }
+    .homesection-lower input{
+      background-color: transparent;
+      width: 100%;
+      height: 0.1em;
+      font-size: auto;
+    }
+    .homesection-email-div button{
+      width: 50%;
+      height: auto;
+      font-size: clamp(0.2em , 1.2em ,1.5em);
+    }
+    .home-left h2{
+      font-size: 100%;
+    }
+
+    .home-right img{
+      width: 2%;
+    }
+
+  }

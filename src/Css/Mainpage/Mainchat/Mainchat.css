@@ -1,0 +1,11 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.Main-content{
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 3fr 1fr;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ffffff;
+}

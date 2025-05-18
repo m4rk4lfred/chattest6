@@ -1,0 +1,42 @@
+footer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  padding: 1.5em;
+  background-color: #04045E;
+  color: snow;
+  border-top: 2px solid #FF9E01;
+  border-bottom: 2px solid #FF9E01;
+  font-family: "Jersey 20", "Poppins", sans-serif;
+}
+
+.footer-content h1 {
+  font-size: 45px;
+  margin: 0.5em 0;
+}
+
+.footer-cri {
+  align-self: center;
+  justify-self: center;
+  margin-top: 25px;
+}
+
+.footer-findus-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.footer-findus-wrapper img {
+  width: 2em;
+  height: 2em;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.footer-findus-wrapper img:hover {
+  transform: scale(1.2);
+}

@@ -14,3 +14,18 @@ If you are developing a production application, we recommend using TypeScript an
 ## XAMPP
 Set up under htdocs, using xampp-control activate Apache and MYSQL
 place under folder name CCIS_CONNECT-master strictly, otherwise change fetch() in Login.jsx and Signup.jsx
+
+## MYSQL 
+Run this on MYSQL  
+CREATE TABLE IF NOT EXISTS messages (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(255) NOT NULL,
+  content TEXT NOT NULL,
+  timestamp DATETIME NOT NULL
+);
+
+## SETUP
+-> Change database info in db.php and socketServer.js 
+# RUN THESE  
+npm run dev  
+node src/socketServer.js  

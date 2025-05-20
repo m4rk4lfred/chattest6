@@ -17,12 +17,19 @@ place under folder name CCIS_CONNECT-master strictly, otherwise change fetch() i
 
 ## MYSQL 
 Run this on MYSQL  
-CREATE TABLE IF NOT EXISTS messages (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  username VARCHAR(255) NOT NULL,
-  content TEXT NOT NULL,
-  timestamp DATETIME NOT NULL
-);
+CREATE TABLE IF NOT EXISTS messages (  
+  id INT AUTO_INCREMENT PRIMARY KEY,  
+  username VARCHAR(255) NOT NULL,  
+  content TEXT NOT NULL,  
+  timestamp DATETIME NOT NULL  
+);  
+
+ALTER TABLE messages ADD COLUMN room VARCHAR(255) NOT NULL DEFAULT 'Dev Circle';  
+
+CREATE TABLE IF NOT EXISTS rooms (  
+  id INT AUTO_INCREMENT PRIMARY KEY,  
+  name VARCHAR(255) UNIQUE NOT NULL  
+);  
 
 ## SETUP
 -> Change database info in db.php and socketServer.js 

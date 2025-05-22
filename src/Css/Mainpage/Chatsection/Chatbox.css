@@ -1,10 +1,10 @@
 :root {
   --Main-font: "Inter", sans-serif;
   --chat-bg: #f7f7f7;
-  --chat-self-bg: #d1ffd6;
+  --chat-self-bg: #b0aedd;
   --chat-other-bg: #ffffff;
   --chat-border: #ccc;
-  --chat-timestamp-color: #888;
+  --chat-timestamp-color: #1b1204;
   --chat-bubble-radius: 15px;
 }
 

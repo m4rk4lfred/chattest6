@@ -40,7 +40,6 @@ function Signup({ email, closeSignup, loginShow, signupShow }) {
       if (result.success) {
         alert("Signup successful!");
         closeSignup(false);
-
       } else {
         alert("Signup failed: " + result.error);
       }

@@ -1,8 +1,5 @@
 <?php
 //dito magadjust ng dirs para di magulo nalang
-header("Access-Control-Allow-Origin: *"); // Allow requests from any origin, bale para mafetch to ni jsx
-header("Access-Control-Allow-Methods: POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
 
 $user = "root";
 $pass = "root";

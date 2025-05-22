@@ -186,3 +186,63 @@ border-radius: 100px;
     flex-direction: column;
     overflow-y: scroll;
 }
+
+
+.Chatlist-header h1 {
+  margin: 0;
+  font-size: 1.5em;
+  color: #04045E;
+}
+
+.Chatlist-divider {
+  margin: 0;
+  border: none;
+  border-top: 1px solid #eee;
+}
+
+.Chatlist-profile-section {
+  padding: 1.2em 1em 1em 1em;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  background: transparent;
+}
+
+.username-input {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 0.2em 0.5em;
+  font-size: 1em;
+  margin-right: 4px;
+}
+
+.username-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 0.2em 0.7em;
+  cursor: pointer;
+  font-size: 1.1em;
+  margin-left: 2px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.username-btn.edit {
+  background: transparent;
+  color: #ff9e01;
+}
+
+.username-btn.save {
+  background: #ff9e01;
+  color: #fff;
+}
+
+.username-btn.cancel {
+  background: #eee;
+  color: #04045E;
+}
+
+.username-error {
+  color: #d32f2f;
+  font-size: 0.9em;
+  margin-top: 2px;
+}

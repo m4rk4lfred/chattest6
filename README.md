@@ -39,13 +39,14 @@ CREATE TABLE IF NOT EXISTS rooms (
 # RUN THESE  
 npm run dev  
 node src/socketServer.js  
-node uploadServer.js
+node uploadServer.cjs  
 
 
 
 # UPDATED INSTALLED NPM
-npm install express multer
-npm install multer cors mysql
+npm install vite  
+npm install express multer  
+npm install multer cors mysql  
 
 
 #IF THIS ERROR OCCUR (SyntaxError: Cannot use import statement outside a module)

@@ -31,7 +31,7 @@ function Newcontact(){
               </div>
               <hr />
 
-              <p>Follow us:</p>
+              <p className="follow-text">Follow us:</p>
              <a href="https://www.facebook.com/mmsuccis" target="black"><img src={facebookLogo} alt="facebook.svg" /></a> 
 
         </div>

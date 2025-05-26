@@ -70,6 +70,18 @@
   box-sizing: border-box;
   padding: 2em 5em;
 }
+.about-layout-card-left p{
+  text-align: center;
+  margin-top: 1em;
+  justify-content: center;
+  align-items: center;
+}
+.about-layout-card-right p{
+  text-align: center;
+  margin-top: 1em;
+  justify-content: center;
+  align-items: center;
+}
 
 .about-footer {
   display: flex; 

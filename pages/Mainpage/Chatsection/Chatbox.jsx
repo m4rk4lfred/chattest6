@@ -74,7 +74,7 @@ function Chatbox({ username }) {
   };
 
   return (
-    <div className="Chatbox-main-layout" style={{ display: 'flex', height: '100%' }}>
+    <div className="Chatbox-main-layout" style={{ display: 'flex', height: '100%',width: '70%' }}>
       {/* Sidebar for rooms */}
       <div className="Chatbox-room-sidebar" style={{ width: 180, borderRight: '1px solid #eee', background: '#fafbfc', padding: '1em 0' }}>
         <div style={{ padding: '0 1em', marginBottom: '1em' }}>

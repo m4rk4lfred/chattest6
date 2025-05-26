@@ -85,20 +85,21 @@ hr{
 
 .contact-right-formbox{
   display: flex;
-  background-color: #ffffff;
+  background-color: #f7f7f7;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 50%;
+  width:50%;
   height: 70%;
   box-sizing: border-box;
-  padding: 3em;
+  padding: 3em 2em;
   flex-shrink: 1;
   box-shadow: 0em 0em 90em -5em black;
+  margin: 0;
 }
 
 .contact-right-formbox input{
-  width: 20em;
+  width: 100%;
   padding: 0.5em;
   background-color: transparent;
   box-sizing: border-box;
@@ -139,6 +140,34 @@ hr{
 .contact-submit-button button:hover{
   border: 1px solid #FF9E01;
   color: #FF9E01;
+}
+
+@media screen and (max-width: 768px) {
+  .Newcontact-content {
+    flex-direction: column;
+  }
+  .contact-left,.contact-right {
+    width: 100%;
+    height: auto;
+  }
+  .contact-left {
+    padding: 1em;
+  }
+  .contact-left a , .contact-left img , .follow-text{
+    font-size: clamp(0.8em, 2vw, 1.2em);
+    margin-left: 0.5em;
+  }
+
+  .contact-right-formbox {
+    width: 70%;
+    height: auto;
+    margin-bottom: 1em;
+    box-shadow: 0 0 0.2em 0 gray;
+  }
+  .contact-left h1 {
+    font-size: clamp(2em, 4vw, 4em);
+  }
+  
 }
 
 

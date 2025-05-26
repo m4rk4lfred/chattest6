@@ -10,7 +10,12 @@ import Exit from '../../src/assets/exit.svg'
 import HomeIcon from '../../src/assets/home_icon.svg'
 import '../../src/Css/Landingpagecss/Home.css';
 import { useNavigate } from 'react-router-dom'
-
+import { IoHomeOutline } from "react-icons/io5";
+import { MdOutlineFeaturedPlayList } from "react-icons/md";
+import { IoIosInformationCircle } from "react-icons/io";
+import { MdContacts } from "react-icons/md";
+import { IoLogInOutline } from "react-icons/io5";
+import { MdOutlinePersonOutline } from "react-icons/md";
 
 
 function Home() {
@@ -44,12 +49,12 @@ function Home() {
                      <img src={Exit} alt="" />
                  </label>
 
-                <a href="#HomeSection"><img src={HomeIcon} alt="" />Home</a>
-                <a href="#FeaturesSection">Features</a>
-                <a href="#AboutSection">About</a>
-                <a href="#ContactSection">Contact</a>
-                <a onClick={()=>signupState(true)}>Sign up</a>
-                <a onClick={()=>loginState(true)}>Login</a>
+                <a href="#HomeSection"><IoHomeOutline size={'15px'} /> Home</a>
+                <a href="#FeaturesSection"><MdOutlineFeaturedPlayList size={'15px'}/> Features</a>
+                <a href="#AboutSection"><IoIosInformationCircle size={'15px'} /> About</a>
+                <a href="#ContactSection"><MdContacts />Contact</a>
+                <a onClick={()=>signupState(true)}><MdOutlinePersonOutline size={'15px'}/>Sign up</a>
+                <a onClick={()=>loginState(true)}><IoLogInOutline size={'15px'} />Login</a>
 
             </div>
             

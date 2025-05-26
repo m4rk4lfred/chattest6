@@ -14,15 +14,15 @@ function AboutSection(){
     
      <div className="about-body">
          <div className="about-layout-card-right">
-           <AboutCard />
+           <AboutCard header={"Purpose"} content={"Created to address common challenges in academic life—such as finding groupmates, sharing study materials, and managing deadlines—CCIS Connect serves as a digital hub that simplifies collaboration and enhances student communication."}/>
          </div>
          
          <div className="about-layout-card-left">
-           <AboutCard />
+           <AboutCard header={"Mission"} content={"To provide a unified space where CCIS students can connect, collaborate, and grow through streamlined academic tools and peer-driven support."} />
          </div>
 
          <div className="about-layout-card-right">
-           <AboutCard />
+           <AboutCard header={"Vision"} content={"To become the leading internal platform that fosters a culture of shared learning, academic excellence, and digital unity within CCIS."}/>
          </div>
          
      </div>

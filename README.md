@@ -31,8 +31,23 @@ CREATE TABLE IF NOT EXISTS rooms (
   name VARCHAR(255) UNIQUE NOT NULL  
 );  
 
+
+
+
 ## SETUP
 -> Change database info in db.php and socketServer.js 
 # RUN THESE  
 npm run dev  
 node src/socketServer.js  
+node uploadServer.js
+
+
+
+# UPDATED INSTALLED NPM
+npm install express multer
+npm install multer cors mysql
+
+
+#IF THIS ERROR OCCUR (SyntaxError: Cannot use import statement outside a module)
+- access the package.json then change the type to this -> "type": "module", 
+

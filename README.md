@@ -52,3 +52,13 @@ npm install multer cors mysql
 #IF THIS ERROR OCCUR (SyntaxError: Cannot use import statement outside a module)
 - access the package.json then change the type to this -> "type": "module", 
 
+# RUN THIS NEW LINE IN SQL
+
+CREATE TABLE uploaded_files (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  filename VARCHAR(255) NOT NULL,
+  originalname VARCHAR(255) NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  user_id INT NOT NULL,
+  uploaded_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);

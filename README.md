@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS rooms (
 # RUN THESE  
 npm run dev  
 node src/socketServer.js  
-node uploadServer.cjs  
+node uploadServer.mjs  
 
 
 

@@ -39,15 +39,26 @@ CREATE TABLE IF NOT EXISTS rooms (
 # RUN THESE  
 npm run dev  
 node src/socketServer.js  
-node uploadServer.js
+node uploadServer.mjs  
 
 
 
 # UPDATED INSTALLED NPM
-npm install express multer
-npm install multer cors mysql
+npm install vite  
+npm install express multer  
+npm install multer cors mysql  
 
 
 #IF THIS ERROR OCCUR (SyntaxError: Cannot use import statement outside a module)
 - access the package.json then change the type to this -> "type": "module", 
 
+# RUN THIS NEW LINE IN SQL
+
+CREATE TABLE uploaded_files (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  filename VARCHAR(255) NOT NULL,
+  originalname VARCHAR(255) NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  user_id INT NOT NULL,
+  uploaded_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);

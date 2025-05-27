@@ -34,7 +34,7 @@ import { CiSearch } from "react-icons/ci";
  * @param {React.DragEvent} e - The drag event.
  */
 
-function UploadArea(){
+function UploadArea({ username, userId }) {
   const [uploadModal , setUploadModal] = useState(false);
   const fileInputRef = useRef(null);
   const [dragState , setDrag] = useState(false);
@@ -43,6 +43,7 @@ function UploadArea(){
   const [uploadError, setUploadError] = useState('');
   const [uploadSuccess, setUploadSuccess] = useState('');
   const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [title, setTitle] = useState('');
 
   // Fetch uploaded files from server
   const fetchUploadedFiles = async () => {
@@ -72,36 +73,39 @@ function UploadArea(){
   }
 
   // Upload files to server
-  const handleUpload = async (e) => {
-    e.preventDefault();
-    setUploading(true);
-    setUploadError('');
-    setUploadSuccess('');
-    if (files.length === 0) {
-      setUploadError('No files selected.');
-      setUploading(false);
-      return;
-    }
-    const formData = new FormData();
-    files.forEach(f => formData.append('files', f));
-    try {
-      const res = await fetch('http://localhost:3090/uploads', {
-        method: 'POST',
-        body: formData,
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setUploadSuccess('Upload successful!');
-        setFiles([]);
-        fetchUploadedFiles(); // Refresh the list after upload
-      } else {
-        setUploadError(data.error || 'Upload failed.');
-      }
-    } catch (err) {
-      setUploadError('Upload failed: ' + err.message);
-    }
+const handleUpload = async (e) => {
+  e.preventDefault();
+  setUploading(true);
+  setUploadError('');
+  setUploadSuccess('');
+  if (files.length === 0) {
+    setUploadError('No files selected.');
     setUploading(false);
-  };
+    return;
+  }
+  const formData = new FormData();
+  files.forEach(f => formData.append('files', f));
+  formData.append('title', title);
+  formData.append('user_id', userId);
+
+  try {
+    const res = await fetch('http://localhost:3090/uploads', {
+      method: 'POST',
+      body: formData,
+    });
+    const data = await res.json();
+    if (res.ok) {
+      setUploadSuccess('Upload successful!');
+      setFiles([]);
+      fetchUploadedFiles();
+    } else {
+      setUploadError(data.error || 'Upload failed.');
+    }
+  } catch (err) {
+    setUploadError('Upload failed: ' + err.message);
+  }
+  setUploading(false);
+};
 
   return(
     <>
@@ -126,51 +130,41 @@ function UploadArea(){
   gap: '10px',
   padding: '10px'
 }}>
-  {uploadedFiles.map(name => (
-    <div
-      key={name}
+  {uploadedFiles.map(file => (
+  <div key={file.id} style={{
+    width: '120px',
+    minHeight: '60px',
+    border: '1px solid #ccc',
+    borderRadius: '8px',
+    padding: '8px',
+    background: '#fafafa',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '0.95em',
+    boxShadow: '0 1px 2px rgba(0,0,0,0.04)'
+  }}>
+    <div title={file.title} style={{ fontWeight: 'bold', marginBottom: '4px' }}>
+      {file.title}
+    </div>
+    <div style={{ fontSize: '0.9em', color: '#555', marginBottom: '4px' }}>
+      Uploaded by: <b>{file.username}</b>
+    </div>
+    <a
+      href={`http://localhost:3090/uploads/${encodeURIComponent(file.filename)}`}
+      target="_blank"
+      rel="noopener noreferrer"
       style={{
-        width: '120px',
-        minHeight: '60px',
-        border: '1px solid #ccc',
-        borderRadius: '8px',
-        padding: '8px',
-        background: '#fafafa',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '0.95em',
-        boxShadow: '0 1px 2px rgba(0,0,0,0.04)'
+        fontSize: '0.85em',
+        color: '#1976d2',
+        textDecoration: 'underline'
       }}
     >
-      <div
-        style={{
-          whiteSpace: 'nowrap',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          width: '100%',
-          textAlign: 'center',
-          marginBottom: '6px'
-        }}
-        title={name}
-      >
-        {name}
-      </div>
-      <a
-        href={`http://localhost:3090/uploads/${encodeURIComponent(name)}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          fontSize: '0.85em',
-          color: '#1976d2',
-          textDecoration: 'underline'
-        }}
-      >
-        Download
-      </a>
-    </div>
-  ))}
+      Download
+    </a>
+  </div>
+))}
 </div>
             </div>
           </div>
@@ -186,7 +180,14 @@ function UploadArea(){
            <form className="uploadModal-box-body" onSubmit={handleUpload}>
              <label htmlFor="Module-name">Title</label>
              <br />
-             <input type="text" name='Module-name' className='Document-title-input'/>  
+             <input
+                type="text"
+                name='Module-name'
+                className='Document-title-input'
+                value={title}
+                onChange={e => setTitle(e.target.value)}
+                required
+              /> 
              <div className="Document-upload-box" onClick={openFilePicker} onDragOver={(e) => e.preventDefault()}>
                <p>Drop your files here or choose your file</p>
              </div>

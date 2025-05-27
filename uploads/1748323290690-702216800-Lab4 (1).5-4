@@ -1,0 +1,72 @@
+#============================================================#
+#      		FINDING NTH FIBONACCI NUMBER	  	     #
+#============================================================#
+.data
+	str1:	.asciiz		"Enter a number: "
+	str2:	.asciiz		"Fibonacci Number in position "
+	str3:	.asciiz		" is "
+
+
+.text
+.globl main
+main:
+	#Prompts the user to enter a number
+	li $v0, 4
+	la $a0, str1
+	syscall
+	
+	#Get user input and storen in regiter $t0
+	li $v0, 5
+	syscall
+	move $t0, $v0
+	
+	li $s0, 0	# $s0 stores 1st Fibonacci Number
+	li $s1, 1	# $s1 stores 2nd Fibonacci Number
+	
+	beqz $t0, print
+	
+	li $t1, 1
+	beq $t1, $t0, print
+	
+	li $t1, 2	#counter
+
+fibonacci:
+
+	bgt $t1, $t0, print 	#Jump to print the nth fibo number if [ user input ($t1) >  counter ($t0)]	
+	
+	move $s2, $s0		#temp = fib0
+	move $s0, $s1		#fib0 = fib1
+	add $s1, $s2, $s1		#fib1 = temp + fib1
+	addi $t1, $t1, 1		#increments counter (i++)
+
+	j fibonacci		#Loops the branch
+
+print:
+	move $s3, $s1			#Move the value of fib1($s1) to the container of nth fibo number ($s3)
+
+	#Prints the result message  
+	li $v0, 4
+	la $a0, str2
+	syscall
+	
+	#Prints the position from the user input
+	li $v0, 1
+	move $a0, $t0
+	syscall
+	
+	#Prints the position message
+	li $v0, 4
+	la $a0, str3
+	syscall
+	
+	#Prints the nth fibonacii number
+	li $v0, 1
+	move $a0, $s3
+	syscall
+	
+	#Exits the program
+	li $v0, 10
+	syscall
+	
+	
+	

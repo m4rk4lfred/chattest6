@@ -24,8 +24,9 @@ function Login({ closeLogin, showlogin, showsignup }) {
             const result = await response.json();
 
             if (result.success) {
-                // Store the username (studentID) in localStorage
+        
                 localStorage.setItem('username', result.username);
+                localStorage.setItem('userId', result.userId); // Store userId if needed
 
                 alert("Login Successful!");
                 navigate("/Mainpage"); // Redirect to the main page

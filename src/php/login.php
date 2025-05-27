@@ -25,7 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->fetch();
 
         if (password_verify($password, $hashedPassword)) {
-            echo json_encode(["success" => true, "username" => $username]);
+            echo json_encode(["success" => true, "username" => $username, "userId" => $stmt->insert_id]);
+            session_start();
         } else {
             echo json_encode(["success" => false, "message" => "Invalid credentials"]);
         }

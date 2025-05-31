@@ -5,23 +5,38 @@ import Recentchatcontainer from "../../Component/Recentchatcontainer";
 import { io } from 'socket.io-client';
 import '../../../src/Css/Mainpage/Chatsection/Chatlist.css';
 
-function Chatlist({ username, setUsername }) {
+const DEFAULT_ROOM = "Dev Circle";
+
+function Chatlist({ username, setUsername, room, setRoom, userId, setUserId}) {
   const [Dropdown, setDropdown] = useState(true);
   const [editing, setEditing] = useState(false);
   const [newUsername, setNewUsername] = useState('');
   const [socket, setSocket] = useState(null);
   const [error, setError] = useState('');
-const [userId, setUserId] = useState(null);
+  //const [room, setRoom] = useState(DEFAULT_ROOM);
+  const [newRoom, setNewRoom] = useState('');
+  const [roomList, setRoomList] = useState([DEFAULT_ROOM]);
+  room = localStorage.getItem('currentroom') || 'Dev Circle';
 
+  
 useEffect(() => {
   async function fetchUsername() {
     try {
+      // First try to get from localStorage
+      const storedUsername = localStorage.getItem('username');
+      if (storedUsername) {
+        setUsername(storedUsername);
+        setNewUsername(storedUsername);
+        return;
+      }
+
       const res = await fetch('http://localhost/CCIS_CONNECT-MASTER/src/php/get_username.php', { credentials: 'include' });
       const data = await res.json();
       if (data.username) {
         setUsername(data.username);
         setNewUsername(data.username);
         setUserId(data.userId);
+        localStorage.setItem('username', data.username);
       } else {
         setUsername('Unknown');
         setNewUsername('Unknown');
@@ -52,15 +67,35 @@ useEffect(() => {
     const handler = (result) => {
       if (result.success) {
         setUsername(result.newUsername);
+        localStorage.setItem('username', result.newUsername);
         setEditing(false);
         setError('');
       } else {
-        setError(result.error || 'Failed to change username.');
+        setError( result.error || 'Failed to change username.');
       }
     };
     socket.on('username_changed', handler);
     return () => socket.off('username_changed', handler);
   }, [socket, setUsername]);
+
+  useEffect(() => {
+    if (!socket) return;
+    socket.emit('get_rooms');
+    socket.on('room_list', (rooms) => {
+      setRoomList(rooms.includes(DEFAULT_ROOM) ? rooms : [DEFAULT_ROOM, ...rooms]);
+    });
+    return () => {
+      socket.off('room_list');
+    };
+  }, [socket]);
+
+  const handleCreateRoom = () => {
+    if (newRoom.trim() !== '' && socket) {
+      setRoom(newRoom.trim());
+      socket.emit('join_room', newRoom.trim());
+      setNewRoom('');
+    }
+  };
 
   // Handlers
   const handleUsernameChange = (e) => setNewUsername(e.target.value);
@@ -106,7 +141,6 @@ useEffect(() => {
                   className="username-input"
                   maxLength={32}
                   autoFocus
-                  onBlur={() => setEditing(false)}
                   style={{ width: "8em" }}
                 />
                 <button
@@ -146,7 +180,43 @@ useEffect(() => {
       </div>
       {Dropdown && (
         <div className="Chatlist-recent-section">
-          <Recentchatcontainer />
+          <div style={{ padding: '0 1em', marginBottom: '1em' }}>
+            <input
+              type="text"
+              value={newRoom}
+              onChange={(e) => setNewRoom(e.target.value)}
+              placeholder="New room name"
+              style={{ width: '100%', borderRadius: '8px', padding: '0.3em' }}
+            />
+            <button 
+              style={{ width: '100%', marginTop: 6 }} 
+              onClick={handleCreateRoom}
+            >
+              Create/Join Room
+            </button>
+          </div>
+          <div>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              {roomList.map((r) => (
+                <li
+                  key={r}
+                  style={{
+                    padding: '0.5em 1em',
+                    background: r === room ? '#e6f7ff' : 'transparent',
+                    cursor: 'pointer',
+                    fontWeight: r === room ? 'bold' : 'normal'
+                  }}
+                  onClick={() => {
+                    setRoom(r);
+                    localStorage.setItem('currentroom', r);
+                    if (socket) socket.emit('join_room', r);
+                  }}
+                >
+                  {r}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       )}
     </div>

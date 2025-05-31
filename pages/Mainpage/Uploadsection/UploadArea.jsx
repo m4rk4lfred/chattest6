@@ -97,6 +97,7 @@ const handleUpload = async (e) => {
     if (res.ok) {
       setUploadSuccess('Upload successful!');
       setFiles([]);
+      setTitle('');
       fetchUploadedFiles();
     } else {
       setUploadError(data.error || 'Upload failed.');
@@ -118,12 +119,12 @@ const handleUpload = async (e) => {
                 <div className="Uploadarea-search">
                   <div className="search-content">
                     <input type="text" placeholder='Search' name="Upload-search-box" id="Upload-search-box" />
-                    <CiSearch size={'3%'}/>
+                    <CiSearch className='search-button'/>
                   </div>
                   <IoIosAdd className='add-button' onClick={() => setUploadModal(true)} />
                 </div>
                 <div className="Uploadarea-data-area" style={{
-  maxHeight: '300px',
+  maxHeight: '500px',
   overflowY: 'auto',
   display: 'flex',
   flexWrap: 'wrap',
@@ -131,19 +132,8 @@ const handleUpload = async (e) => {
   padding: '10px'
 }}>
   {uploadedFiles.map(file => (
-  <div key={file.id} style={{
-    width: '120px',
-    minHeight: '60px',
-    border: '1px solid #ccc',
-    borderRadius: '8px',
-    padding: '8px',
-    background: '#fafafa',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '0.95em',
-    boxShadow: '0 1px 2px rgba(0,0,0,0.04)'
+  <div className='uploaded-file-container' key={file.id} style={{
+  
   }}>
     <div title={file.title} style={{ fontWeight: 'bold', marginBottom: '4px' }}>
       {file.title}
@@ -189,16 +179,20 @@ const handleUpload = async (e) => {
                 required
               /> 
              <div className="Document-upload-box" onClick={openFilePicker} onDragOver={(e) => e.preventDefault()}>
-               <p>Drop your files here or choose your file</p>
+                Browse Files
              </div>
-             <div className="Files">
+             <div className="Files"  style={{display: files.length > 0 ? 'flex' : 'none',flexDirection: 'column'}}>
                  {files.map(file => <Filecontainer key={file.name + file.size} name={file.name} size={file.size} url={URL.createObjectURL(file)}/>)}
              </div>
              {uploadError && <div style={{color: 'red'}}>{uploadError}</div>}
              {uploadSuccess && <div style={{color: 'green'}}>{uploadSuccess}</div>}
-             <button className="upload-button" type="submit" disabled={uploading}>
+             
+             <div className="uploadButton-container">
+                  <button className="upload-button" type="submit" disabled={uploading}>
                    {uploading ? 'Uploading...' : 'Upload'}
-             </button>
+                  </button>
+             </div>
+ 
              <input type="file" hidden ref={fileInputRef} multiple onChange={handleFileChange} />
            </form>
            </div>

@@ -3,15 +3,14 @@ import { io } from 'socket.io-client';
 import '../../../src/Css/Mainpage/Chatsection/Chatbox.css';
 import { IoMdSend } from "react-icons/io";
 
-const DEFAULT_ROOM = "Dev Circle";
-
-function Chatbox({ username }) {
+function Chatbox({ username, room, userId}) {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const [socket, setSocket] = useState(null);
-  const [room, setRoom] = useState(DEFAULT_ROOM);
-  const [newRoom, setNewRoom] = useState('');
-  const [roomList, setRoomList] = useState([DEFAULT_ROOM]);
+  username = localStorage.getItem('username');
+  userId = localStorage.getItem('userId');
+  room = localStorage.getItem('currentroom') || 'Dev Circle';
+ 
 
   // Connect socket on mount
   useEffect(() => {
@@ -22,22 +21,25 @@ function Chatbox({ username }) {
     };
   }, []);
 
-  // Fetch room list
-  useEffect(() => {
-    if (!socket) return;
-    socket.emit('get_rooms');
-    socket.on('room_list', (rooms) => {
-      // Always include the default room
-      setRoomList(rooms.includes(DEFAULT_ROOM) ? rooms : [DEFAULT_ROOM, ...rooms]);
-    });
-    return () => {
-      socket.off('room_list');
-    };
-  }, [socket]);
+  // // Fetch room list
+  // useEffect(() => {
+  //   if (!socket) return;
+
+  //   socket.on('room_list', (rooms) => {
+  //     // Always include the default room
+  //     setRoomList(rooms.includes(DEFAULT_ROOM) ? rooms : [DEFAULT_ROOM, ...rooms]);
+  //   });
+  //   return () => {
+  //     socket.off('room_list');
+  //   };
+  // }, [socket]);
 
   // Join room and set up listeners
   useEffect(() => {
     if (!socket) return;
+
+    setMessages([]);
+    
     socket.emit('join_room', room);
 
     const handleLoadMessages = (loadedMessages) => setMessages(loadedMessages);
@@ -59,58 +61,23 @@ function Chatbox({ username }) {
         content: message,
         timestamp: new Date().toISOString(),
         room,
+        userId: userId,
       };
       socket.emit('send_message', messageData);
       setMessage('');
     }
   };
 
-  const handleCreateRoom = () => {
-    if (newRoom.trim() !== '' && socket) {
-    setRoom(newRoom.trim());
-    socket.emit('join_room', newRoom.trim());
-    setNewRoom('');
-  }
-  };
+  // const handleCreateRoom = () => {
+  //   if (newRoom.trim() !== '' && socket) {
+  //   setRoom(newRoom.trim());
+  //   socket.emit('join_room', newRoom.trim());
+  //   setNewRoom('');
+  // }
+  // };
 
   return (
-    <div className="Chatbox-main-layout" style={{ display: 'flex', height: '100%',width: '70%' }}>
-      {/* Sidebar for rooms */}
-      <div className="Chatbox-room-sidebar" style={{ width: 180, borderRight: '1px solid #eee', background: '#fafbfc', padding: '1em 0' }}>
-        <div style={{ padding: '0 1em', marginBottom: '1em' }}>
-          <input
-            type="text"
-            value={newRoom}
-            onChange={(e) => setNewRoom(e.target.value)}
-            placeholder="New room name"
-            style={{ width: '100%', borderRadius: '8px', padding: '0.3em' }}
-          />
-          <button style={{ width: '100%', marginTop: 6 }} onClick={handleCreateRoom}>Create/Join</button>
-        </div>
-        <div>
-          <b style={{ marginLeft: '1em' }}>Rooms</b>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-          {roomList.map((r) => (
-            <li
-              key={r}
-              style={{
-                padding: '0.5em 1em',
-                background: r === room ? '#e6f7ff' : 'transparent',
-                cursor: 'pointer',
-                fontWeight: r === room ? 'bold' : 'normal'
-              }}
-              onClick={() => {
-                setRoom(r);
-                if (socket) socket.emit('join_room', r);
-              }}
-            >
-              {r}
-            </li>
-          ))}
-        </ul>
-        </div>
-      </div>
-      {/* Main chat area */}
+    <div className="Chatbox-main-layout" style={{ display: 'flex', height: '100%', width: '70%' }}>
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         <div className="Chatbox-header">
           <p><b>Group Chat - {room}</b></p>
@@ -121,7 +88,7 @@ function Chatbox({ username }) {
               <div
                 key={index}
                 className={`chat-message ${
-                  msg.username === username ? 'chat-message-self' : 'chat-message-other'
+                  (msg.user_id == userId || msg.userId == userId) ? 'chat-message-self' : 'chat-message-other'
                 }`}
               >
                 <div className="chat-bubble">
@@ -135,7 +102,7 @@ function Chatbox({ username }) {
                 </div>
               </div>
             ))}
-          </div>
+            </div>
         </div>
         <div className="Chatbox-input">
           <input

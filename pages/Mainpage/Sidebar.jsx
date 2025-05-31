@@ -9,6 +9,17 @@ import { useNavigate } from 'react-router-dom';
 
 function Sidebar(){
     const useNav = useNavigate();
+
+    const handleLogout = async () => {
+        await fetch('http://localhost/CCIS_CONNECT-MASTER/src/php/logout.php', {
+            method: 'POST',
+            credentials: 'include'
+        });
+        localStorage.removeItem('username');
+        localStorage.removeItem('userId');
+        useNav('/');
+    };
+
     return(
     <>
 
@@ -55,13 +66,19 @@ function Sidebar(){
                <div className='tooltip'><p>Account</p></div>
              </li>
 
-
-             <li className="nav-item">
+              <li className="nav-item" onClick={handleLogout}>
                <a href="#" className="nav-link">
                   <CiLogout className='nav-icon'/>
                </a>
                <div className='tooltip'><p>Logout</p></div>
              </li>
+
+             {/* <li className="nav-item">
+               <a href="#" className="nav-link">
+                  <CiLogout className='nav-icon'/>
+               </a>
+               <div className='tooltip'><p>Logout</p></div>
+             </li> */}
 
          </ul>
 

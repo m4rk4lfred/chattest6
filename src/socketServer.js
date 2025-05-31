@@ -22,10 +22,8 @@ io.on('connection', async (socket) => {
   let currentRoom = 'Dev Circle';
   socket.join(currentRoom);
 
-  // Ensure default room exists
   await db.query('INSERT IGNORE INTO rooms (name) VALUES (?)', [currentRoom]);
 
-  // Load messages for the default room
   const [rows] = await db.query(
     'SELECT * FROM messages WHERE room = ? ORDER BY timestamp ASC',
     [currentRoom]
@@ -59,11 +57,11 @@ io.on('connection', async (socket) => {
 
   // Listen for messages from clients
   socket.on('send_message', async (data) => {
-    const { username, content, timestamp, room = 'Dev Circle' } = data;
+    const { username, content, timestamp, room = 'Dev Circle', userId} = data;
     const mysqlTimestamp = new Date(timestamp).toISOString().slice(0, 19).replace('T', ' ');
     await db.query(
-      'INSERT INTO messages (username, content, timestamp, room) VALUES (?, ?, ?, ?)',
-      [username, content, mysqlTimestamp, room]
+      'INSERT INTO messages (username, content, timestamp, room, user_id) VALUES (?, ?, ?, ?, ?)',
+      [username, content, mysqlTimestamp, room, userId]
     );
     // Broadcast to the room only
     io.to(room).emit('receive_message', data);
@@ -84,11 +82,6 @@ socket.on('change_username', async ({ userId, newUsername }) => {
     // Update username in users table by userId
     await db.query(
       'UPDATE users SET username = ? WHERE id = ?',
-      [newUsername, userId]
-    );
-    // Optionally update username in messages table for consistency
-    await db.query(
-      'UPDATE messages SET username = ? WHERE user_id = ?',
       [newUsername, userId]
     );
     socket.emit('username_changed', { success: true, newUsername });

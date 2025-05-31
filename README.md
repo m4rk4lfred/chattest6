@@ -63,9 +63,21 @@ CREATE TABLE uploaded_files (
   uploaded_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+# ADD THIS SH+T FOR EASIER RUNNING
+npm install --save-dev concurrently
 
+at package.json add the start:all line
+"scripts": {
+  "dev": "vite",
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d dist",
+  "build": "vite build",
+  "lint": "eslint .",
+  "preview": "vite preview",
+  "start:all": "concurrently \"npm run dev\" \"node src/ socketServer.js\" \"node uploadServer.mjs\""
+},
 
-
+npm run start:all
 
 # NEW NEW SQL
 ALTER TABLE messages add column user_id int not null;  

@@ -62,3 +62,10 @@ CREATE TABLE uploaded_files (
   user_id INT NOT NULL,
   uploaded_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+
+
+
+
+# NEW NEW SQL
+ALTER TABLE messages add column user_id int not null;  

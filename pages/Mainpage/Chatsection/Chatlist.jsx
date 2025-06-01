@@ -4,10 +4,11 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import Recentchatcontainer from "../../Component/Recentchatcontainer";
 import { io } from 'socket.io-client';
 import '../../../src/Css/Mainpage/Chatsection/Chatlist.css';
+import Chatbox from './Chatbox';
 
 const DEFAULT_ROOM = "Dev Circle";
 
-function Chatlist({ username, setUsername, room, setRoom, userId, setUserId}) {
+function Chatlist({ username, setUsername, room, setRoom, userId, setUserId,openChat, setOpenChat}) {
   const [Dropdown, setDropdown] = useState(true);
   const [editing, setEditing] = useState(false);
   const [newUsername, setNewUsername] = useState('');
@@ -17,6 +18,7 @@ function Chatlist({ username, setUsername, room, setRoom, userId, setUserId}) {
   const [newRoom, setNewRoom] = useState('');
   const [roomList, setRoomList] = useState([DEFAULT_ROOM]);
   room = localStorage.getItem('currentroom') || 'Dev Circle';
+  const [isVisible, setIsVisible] = useState(true);
 
   
 useEffect(() => {
@@ -116,6 +118,9 @@ useEffect(() => {
   }
 
   return (
+    
+  (isVisible && 
+    (
     <div className="Chatlist-container">
       <div className="Chatlist-header">
         <h1>Chat</h1>
@@ -157,26 +162,36 @@ useEffect(() => {
               </>
             ) : (
               <>
-                <h3 className="username-display">{username || 'No Username'}</h3>
-                <button
-                  className="username-btn edit"
-                  type="button"
-                  onClick={() => { setEditing(true); setError(''); }}
-                  title="Edit Username"
-                >✎</button>
+                <div className="username-container">
+                   <h3 className="username-display">{username || 'No Username'}</h3>
+                    <button
+                      className="username-btn edit"
+                      type="button"
+                      onClick={() => { setEditing(true); setError(''); }}
+                      title="Edit Username"
+                     >✎</button>
+
+                </div>
+               
               </>
             )}
           </form>
-          <span className="profile-status">
-            <FaCircle color="#00d26a" size={10} /> Online
-          </span>
+          <div className="profilestatus-container">
+              <span className="profile-status"> 
+                 <FaCircle color="#00d26a" size={10} /> Online
+              </span>
+          </div>
+
           {error && <span className="username-error">{error}</span>}
         </div>
       </div>
 
       <div className="Chatlist-dropdown-section" onClick={toggleDropdown}>
-        <span>Recent Chats</span>
-        <IoMdArrowDropdown size={22} style={{ transform: Dropdown ? 'rotate(0deg)' : 'rotate(-90deg)', transition: 'transform 0.2s' }} />
+        <div className="recent-dropdown">
+           <span>Recent Chats</span>
+          <IoMdArrowDropdown size={22} style={{ transform: Dropdown ? 'rotate(0deg)' : 'rotate(-90deg)', transition: 'transform 0.2s' }} />
+        </div>
+        
       </div>
       {Dropdown && (
         <div className="Chatlist-recent-section">
@@ -188,28 +203,24 @@ useEffect(() => {
               placeholder="New room name"
               style={{ width: '100%', borderRadius: '8px', padding: '0.3em' }}
             />
-            <button 
-              style={{ width: '100%', marginTop: 6 }} 
-              onClick={handleCreateRoom}
-            >
-              Create/Join Room
-            </button>
+            <div className="createroom-container">
+              <button 
+              className='create-room-btn'onClick={handleCreateRoom}>Create/Join Room
+              </button>
+            </div>
+           
           </div>
-          <div>
+          <div className="chat-list-container">
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
               {roomList.map((r) => (
-                <li
+                <li 
+                  className={`chat-list-item${r === room ? ' selected' : ''}`}
                   key={r}
-                  style={{
-                    padding: '0.5em 1em',
-                    background: r === room ? '#e6f7ff' : 'transparent',
-                    cursor: 'pointer',
-                    fontWeight: r === room ? 'bold' : 'normal'
-                  }}
                   onClick={() => {
                     setRoom(r);
                     localStorage.setItem('currentroom', r);
                     if (socket) socket.emit('join_room', r);
+                    setOpenChat(true);
                   }}
                 >
                   {r}
@@ -220,7 +231,7 @@ useEffect(() => {
         </div>
       )}
     </div>
-  );
+  )));
 }
 
 export default Chatlist;

@@ -80,15 +80,15 @@ aside{
     border-radius: 10px;
     box-sizing: border-box;
     padding: 0.5em;
-    background-color: #f7f7f7;
     transition: all 0.5s ease-in-out;
     font-family: var(--Main-font);
     z-index: 50;
+    background-color: #FFFFFF;
 }
 
 .list-container ul li:hover .tooltip{
     visibility: visible;
     opacity: 1;
-    right: -90px;;
+    right: -87px;
 }
 

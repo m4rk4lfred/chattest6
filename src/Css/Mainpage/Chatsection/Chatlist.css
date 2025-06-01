@@ -37,6 +37,8 @@ hr{
     background-color: transparent;
     font-family: "Inter", sans-serif;
     background-color: transparent;
+    padding: 0;
+    box-sizing: border-box;
 }
 .profile-placeholder{
     height: 5em;
@@ -199,6 +201,12 @@ border-radius: 100px;
   border: none;
   border-top: 1px solid #eee;
 }
+.recent-dropdown{
+    display: flex;
+    margin-left: 1em;
+    align-items: center;
+    flex-direction: row;
+}
 
 .Chatlist-profile-section {
   padding: 1.2em 1em 1em 1em;
@@ -206,6 +214,67 @@ border-radius: 100px;
   display: flex;
   align-items: center;
   background: transparent;
+}
+.create-room-btn{
+    width: 100%;
+    height: fit-content;
+    background-color: transparent;
+    border: 1px solid #04045E;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: clamp(0.4em, 1.2vw, 1.2em);
+    padding: 0.5em 1em;
+    transition: all 0.2s ease-in-out;
+}
+.create-room-btn:hover{
+    background-color: #04045E;
+    color: white;
+}
+.chat-list-item{
+    padding: 0.5em 1em;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 10px;
+    font-weight: normal;
+}
+.chat-list-item:hover {
+    background-color:#f7f7f7;
+    cursor: pointer;
+}
+.chat-list-item.selected {
+  background-color: #e6f7ff;
+  font-weight: bold;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+.createroom-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 70%;
+    background-color: transparent;
+}
+.username-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    position: relative;
+    
+}
+
+.profilestatus-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: transparent;
 }
 
 .username-input {
@@ -219,16 +288,19 @@ border-radius: 100px;
 .username-btn {
   border: none;
   border-radius: 6px;
-  padding: 0.2em 0.7em;
+  padding: 0.2em 0.5em;
   cursor: pointer;
   font-size: 1.1em;
   margin-left: 2px;
   transition: background 0.2s, color 0.2s;
+  position: relative;
 }
 
 .username-btn.edit {
+  position: absolute;
   background: transparent;
   color: #ff9e01;
+  right: -2em;
 }
 
 .username-btn.save {
@@ -245,4 +317,33 @@ border-radius: 100px;
   color: #d32f2f;
   font-size: 0.9em;
   margin-top: 2px;
+}
+.chat-list-container{
+    background-color: transparent;
+    height: 300px; /* or max-height: 200px; */
+    min-height: 7em;
+    overflow-y: auto;
+}
+
+@media screen and (max-width: 768px) {
+    .Chatlist-container {
+       
+        width: 100%;
+        height: auto;
+    }
+    .Chatlist-header {
+        padding: 0.5em;
+    }
+    .Chatlist-search-section {
+        margin: 0.5em;
+    }
+    .recentchat-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .recentchat-image {
+        width: 4em;
+        height: 4em;
+    }
+    
 }

@@ -2,7 +2,7 @@
 //dito magadjust ng dirs para di magulo nalang
 
 $user = "root";
-$pass = "root";
+$pass = "";
 
 $conn = new mysqli('localhost', $user, $pass);
 

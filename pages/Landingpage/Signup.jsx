@@ -33,8 +33,8 @@ function Signup({ email, closeSignup, loginShow, signupShow }) {
           student_id: studentId,
           password: password
         })
-      })
-      ;
+      });
+      
   
       const result = await response.json();
       if (result.success) {

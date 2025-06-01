@@ -81,3 +81,12 @@ npm run start:all
 
 # NEW NEW SQL
 ALTER TABLE messages add column user_id int not null;  
+
+# NEW SQl
+CREATE TABLE contacts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    message TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
